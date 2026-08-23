@@ -1,6 +1,9 @@
 minimumReleaseAge: 360
 saveExact: true
-strictPeerDependencies: true
+# Ecosystem-ci smoke test only: the project ships an unmet peer of its own
+# (@stylexjs/unplugin wants unplugin ^2, the repo installs 3.x), which a
+# regenerated lockfile surfaces. Unrelated to vite-plus.
+strictPeerDependencies: false
 updateNotifier: false
 allowBuilds:
   esbuild: true
