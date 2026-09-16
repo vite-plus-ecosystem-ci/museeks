@@ -55,6 +55,7 @@ export const VITE_PLUGINS: PluginOption[] = [
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  test: { clearMocks: false },
   plugins: VITE_PLUGINS,
 
   build: {

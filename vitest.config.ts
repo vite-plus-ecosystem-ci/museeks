@@ -7,20 +7,27 @@ import { VITE_PLUGINS } from './vite.config';
 
 export default defineConfig({
   test: {
+    clearMocks: false,
+    sharedViteServer: false,
     projects: [
       {
+        extends: false,
         test: {
+          clearMocks: false,
           name: 'unit',
           environment: 'node',
           include: ['**/*.test.ts'],
         },
       },
       {
+        extends: false,
         test: {
+          clearMocks: false,
           name: 'e2e',
           include: ['**/*.test-e2e.ts', '**/*.test-e2e.tsx'],
           includeTaskLocation: true,
           browser: {
+            locators: { exact: false },
             enabled: true,
             provider: playwright(),
             viewport: {
