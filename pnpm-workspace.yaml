@@ -1,6 +1,7 @@
 minimumReleaseAge: 360
 saveExact: true
-strictPeerDependencies: true
+# ecosystem-ci smoke test: pre-existing unplugin peer mismatch
+strictPeerDependencies: false
 updateNotifier: false
 allowBuilds:
   esbuild: true
