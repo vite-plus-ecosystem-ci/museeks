@@ -126,7 +126,11 @@ jobs:
           flatpak install -y flathub org.gnome.Platform//48 org.gnome.Sdk//48
           flatpak install flathub -y org.flatpak.Builder
 
+      # Ecosystem-ci smoke test: the fork has no Apple signing secrets, and the
+      # empty APPLE_CERTIFICATE makes tauri fail at `security import`. Build the
+      # same binaries unsigned on the fork (next step) instead.
       - uses: tauri-apps/tauri-action@v0
+        if: ${{ github.repository_owner != 'vite-plus-ecosystem-ci' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           ENABLE_CODE_SIGNING: ${{ secrets.APPLE_CERTIFICATE }}
@@ -140,6 +144,16 @@ jobs:
           tauriScript: vp run tauri
           includeUpdaterJson: false
           # compile a universal binary for intel + apple sillicon
+          args: ${{ matrix.platform == 'macos-14' && '--target universal-apple-darwin' || '' }}
+
+      - name: Build binaries (unsigned, ecosystem-ci)
+        if: ${{ github.repository_owner == 'vite-plus-ecosystem-ci' }}
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tauriScript: vp run tauri
+          includeUpdaterJson: false
           args: ${{ matrix.platform == 'macos-14' && '--target universal-apple-darwin' || '' }}
 
       - name: Flatpak Checks
