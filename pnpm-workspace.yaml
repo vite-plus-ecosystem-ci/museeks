@@ -9,12 +9,13 @@ allowBuilds:
 
 # Vite+ setup
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@latest
-  vite-plus: 0.1.22
-  vitest: npm:@voidzero-dev/vite-plus-test@latest
+  vite: npm:@voidzero-dev/vite-plus-core@0.0.0-commit.a86fd1603196e23718d16144a472ad91b4ba21be
+  vite-plus: 0.0.0-commit.a86fd1603196e23718d16144a472ad91b4ba21be
+  vitest: 5.1.0
+  '@vitest/browser-playwright': 5.1.0
 overrides:
-  vite: 'catalog:'
-  vitest: 'catalog:'
+  vite@*: 'catalog:'
+  vitest@*: 'catalog:'
 peerDependencyRules:
   allowAny:
     - vite
