@@ -72,9 +72,9 @@ test('Tracks should be selectable via keyboard only (after a single selection)',
   const secondTrack = getTrackAt(1);
   const thirdTrack = getTrackAt(2);
 
-  await expect.element(firstTrack).toHaveTextContent('Whiskey Blues');
-  await expect.element(secondTrack).toHaveTextContent('Majestic Blues');
-  await expect.element(thirdTrack).toHaveTextContent('Romantic Blues');
+  await expect.element(firstTrack).toMatchTextContent('Whiskey Blues');
+  await expect.element(secondTrack).toMatchTextContent('Majestic Blues');
+  await expect.element(thirdTrack).toMatchTextContent('Romantic Blues');
 
   await firstTrack.click();
   await expect.element(firstTrack).toHaveAttribute('aria-selected', 'true');
@@ -158,7 +158,7 @@ test('Search should filter tracks in the library', async () => {
   await expect.element(getTrackAt(0)).not.toBeInTheDocument();
   await expect
     .element(page.getByRole('status'))
-    .toHaveTextContent('Your search returned no results');
+    .toMatchTextContent('Your search returned no results');
 
   // Clicking the search clear button should clear the search
   await searchClear.click();
